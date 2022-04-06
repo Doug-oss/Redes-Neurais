@@ -1,3 +1,3 @@
 ## Projeto de Rede Neurais
 
-- Matrizes
+- Adicionar arquivos html, javascript
