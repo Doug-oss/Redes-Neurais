@@ -1,5 +1,5 @@
 <h1 align="center">Projeto de Rede Neural</h1>
-Aprendendo sobre redes neurais.
+<p>Aprendendo sobre redes neurais.</p>
 
 ### Sobre
 
