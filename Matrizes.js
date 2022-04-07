@@ -91,15 +91,62 @@ class Matrix{
         }
         return newMatrix;
     }
+    //Multiplicação de matriz por escalar
+    static matrixScalarMult(m, n){
+        let newMatrix = new Matrix(m.rows, m.cols);
+        for(let i = 0; i < m.rows; i++){
+            for(let j = 0; j < m.cols; j++){
+                newMatrix.data[i][j] = m.data[i][j] * n;
+            }
+        }
+        return newMatrix;
+    }
+    //Deteminante de matriz
+    static matrixDeterminant(m){
+        if(m.rows != m.cols){
+            console.log("Matriz não é quadrada.");
+            return;
+        }
+        //ordem 1
+        if(m.rows == 1 && m.cols == 1){
+            return m.data[0][0];
+        }
+        //ordem 2
+        if(m.rows == 2 && m.cols == 2){
+            return m.data[0][0] * m.data[1][1] - m.data[0][1] * m.data[1][0];
+        }
+        //ordem 3
+        if(m.rows == 3 && m.cols == 3){
+            return m.data[0][0] * m.data[1][1] * m.data[2][2] + m.data[0][1] * m.data[1][2] * m.data[2][0] + m.data[0][2] * m.data[1][0] * m.data[2][1] - m.data[0][2] * m.data[1][1] * m.data[2][0] - m.data[0][1] * m.data[1][0] * m.data[2][2] - m.data[0][0] * m.data[1][2] * m.data[2][1];
+        }
+        //Teorema de laplace
+        if(m.rows > 3 && m.cols > 3){
+            let det = 0;
+            for(let i = 0; i < m.cols; i++){
+                let newMatrix = new Matrix(m.rows - 1, m.cols - 1);
+                for(let j = 1; j < m.rows; j++){
+                    for(let k = 0; k < m.cols; k++){
+                        if(k < i){
+                            newMatrix.data[j-1][k] = m.data[j][k];
+                        }else if(k > i){
+                            newMatrix.data[j-1][k-1] = m.data[j][k];
+                        }
+                    }
+                }
+                det += Math.pow(-1, i) * m.data[0][i] * Matrix.matrixDeterminant(newMatrix);
+            }
+            return det;
+        }
+    }
+    
 }
 
 
-let m1 = new Matrix(2, 3);
-let m2 = new Matrix(3, 2);
+let m1 = new Matrix(4, 4);
+let m2 = new Matrix(2, 2);
 
 Matrix.matrixRandom(m1);
 Matrix.matrixRandom(m2);
 
 console.table(m1.data);
 console.table(m2.data);
-
