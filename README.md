@@ -9,7 +9,10 @@
   - [x] Matriz Identidade
   - [x] Matriz Transposta
   - [x] Matriz Oposta
-  - [ ] Adição de Matrizes
-  - [ ] Subtração de Matrizes
+  - [x] Adição de Matrizes
+  - [x] Subtração de Matrizes
+  - [x] Multiplicação de Matrizes
+  - [ ] Multiplicação de matriz por um número real
+  
 
-<p align="center">:brazil::skull:</p>
+<p align="center"> :eye: </p>
