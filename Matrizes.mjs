@@ -1,4 +1,4 @@
-class Matrix{
+export class Matrix{
     //Define numero de linhas e colunas
     constructor(rows, cols){
         this.rows = rows;
@@ -13,6 +13,16 @@ class Matrix{
             for(let j = 0; j < m.cols; j++){
                 //numeros gauseanos
                 m.data[i][j] = Math.random() * 2 - 1;
+            }
+
+        }
+
+    }
+    //
+    static matrixMap(m, func){
+        for(let i = 0; i < m.rows; i++){
+            for(let j = 0; j < m.cols; j++){
+                m.data[i][j] = func(m.data[i][j]);
             }
 
         }
@@ -156,8 +166,3 @@ class Matrix{
     }
     
 }
-
-let m1 = new Matrix(2, 2);
-Matrix.matrixRandom(m1);
-
-console.table(m1.data);
