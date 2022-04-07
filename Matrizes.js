@@ -10,7 +10,8 @@ class Matrix{
     static matrixRandom(m){
         for(let i = 0; i < m.rows; i++){
             for(let j = 0; j < m.cols; j++){
-                m.data[i][j] =Math.floor(Math.random() * 10);
+                //numeros entre -10 e 10
+                m.data[i][j] =Math.floor(Math.random() * 20 - 10);
             }
         }
     }
@@ -36,5 +37,17 @@ class Matrix{
         }
         return newMatrix;
     }
+    //Matriz Oposta
+    static matrixOpposite(m){
+        let newMatrix = new Matrix(m.rows, m.cols);
+        for(let i = 0; i < m.rows; i++){
+            for(let j = 0; j < m.cols; j++){
+                newMatrix.data[i][j] = m.data[i][j] * -1;
+            }
+        }
+        return newMatrix;
+    }
 }
+
+
 
