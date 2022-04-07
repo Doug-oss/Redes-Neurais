@@ -47,7 +47,59 @@ class Matrix{
         }
         return newMatrix;
     }
+    //Adição de matrizes
+    static matrixAdd(m1, m2){
+        if(m1.rows != m2.rows || m1.cols != m2.cols){
+            console.log("Matrizes de tamanhos diferentes");
+            return;
+        }
+        let newMatrix = new Matrix(m1.rows, m1.cols);
+        for(let i = 0; i < m1.rows; i++){
+            for(let j = 0; j < m1.cols; j++){
+                newMatrix.data[i][j] = m1.data[i][j] + m2.data[i][j];
+            }
+        }
+        return newMatrix;
+    }
+    //Subtração de matrizes
+    static matrixSub(m1, m2){
+        if(m1.rows != m2.rows || m1.cols != m2.cols){
+            console.log("Matrizes de tamanhos diferentes");
+            return;
+        }
+        let newMatrix = new Matrix(m1.rows, m1.cols);
+        for(let i = 0; i < m1.rows; i++){
+            for(let j = 0; j < m1.cols; j++){
+                newMatrix.data[i][j] = m1.data[i][j] - m2.data[i][j];
+            }
+        }
+        return newMatrix;
+    }
+    //Multiplicação de matrizes
+    static matrixMult(m1, m2){
+        if(m1.cols != m2.rows){
+            console.log("Não é possível multiplicar as matrizes.");
+            return;
+        }
+        let newMatrix = new Matrix(m1.rows, m2.cols);
+        for(let i = 0; i < m1.rows; i++){
+            for(let j = 0; j < m2.cols; j++){
+                for(let k = 0; k < m1.cols; k++){
+                    newMatrix.data[i][j] += m1.data[i][k] * m2.data[k][j];
+                }
+            }
+        }
+        return newMatrix;
+    }
 }
 
 
+let m1 = new Matrix(2, 3);
+let m2 = new Matrix(3, 2);
+
+Matrix.matrixRandom(m1);
+Matrix.matrixRandom(m2);
+
+console.table(m1.data);
+console.table(m2.data);
 
