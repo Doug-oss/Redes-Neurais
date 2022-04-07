@@ -15,6 +15,7 @@
   - [x] Multiplicação de Matrizes
   - [x] Multiplicação de matriz por um número real
   - [x] Função map
+  - [x] Hadamard
 - [ ] Criação da Rede
   - [x] Ligação entre camadas e inicialização dos pesos / bias
   - [ ] Processo feedforward
