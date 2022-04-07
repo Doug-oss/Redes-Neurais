@@ -5,15 +5,18 @@ class Matrix{
         this.cols = cols;
         //Preenche a matriz rXc com 0
         this.data = Array(rows).fill().map(() => Array(cols).fill(0));
+
     }
     //Randomiza os numeros
     static matrixRandom(m){
         for(let i = 0; i < m.rows; i++){
             for(let j = 0; j < m.cols; j++){
-                //numeros entre -10 e 10
-                m.data[i][j] =Math.floor(Math.random() * 20 - 10);
+                //numeros gauseanos
+                m.data[i][j] = Math.random() * 2 - 1;
             }
+
         }
+
     }
     //Matriz Identidade
     static matrixIdent(m){
@@ -24,8 +27,11 @@ class Matrix{
                 }else{
                     ma.data[i][j] = 0;
                 }
+
             }
+
         }
+
     }
     //Matriz Transposta
     static matrixTranspose(m){
@@ -36,6 +42,7 @@ class Matrix{
             }
         }
         return newMatrix;
+
     }
     //Matriz Oposta
     static matrixOpposite(m){
@@ -46,6 +53,7 @@ class Matrix{
             }
         }
         return newMatrix;
+
     }
     //Adição de matrizes
     static matrixAdd(m1, m2){
@@ -60,6 +68,7 @@ class Matrix{
             }
         }
         return newMatrix;
+
     }
     //Subtração de matrizes
     static matrixSub(m1, m2){
@@ -74,6 +83,7 @@ class Matrix{
             }
         }
         return newMatrix;
+
     }
     //Multiplicação de matrizes
     static matrixMult(m1, m2){
@@ -90,6 +100,7 @@ class Matrix{
             }
         }
         return newMatrix;
+
     }
     //Multiplicação de matriz por escalar
     static matrixScalarMult(m, n){
@@ -100,6 +111,7 @@ class Matrix{
             }
         }
         return newMatrix;
+
     }
     //Deteminante de matriz
     static matrixDeterminant(m){
@@ -133,20 +145,19 @@ class Matrix{
                         }
                     }
                 }
+
                 det += Math.pow(-1, i) * m.data[0][i] * Matrix.matrixDeterminant(newMatrix);
             }
+
             return det;
+
         }
+
     }
     
 }
 
-
-let m1 = new Matrix(4, 4);
-let m2 = new Matrix(2, 2);
-
+let m1 = new Matrix(2, 2);
 Matrix.matrixRandom(m1);
-Matrix.matrixRandom(m2);
 
 console.table(m1.data);
-console.table(m2.data);
