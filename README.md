@@ -13,7 +13,12 @@
   - [x] Adição de Matrizes
   - [x] Subtração de Matrizes
   - [x] Multiplicação de Matrizes
-  - [ ] Multiplicação de matriz por um número real
+  - [x] Multiplicação de matriz por um número real
+  - [x] Função map
+- [ ] Criação da Rede
+  - [x] Ligação entre camadas e inicialização dos pesos / bias
+  - [ ] Processo feedforward
+  - [ ] Backpropagation
   
 
 <p align="center"> :eye: </p>
