@@ -7,32 +7,46 @@ export class Matrix {
         this.data = Array(rows).fill().map(() => Array(cols).fill(0));
 
     }
+    //arrayToMatrix
+    static arrayToMatrix(array) {
+        let matrix = new Matrix(array.length, 1);
+        for (let i = 0; i < array.length; i++) {
+            matrix.data[i][0] = array[i];
+        }
+        return matrix;
+    }
+
 
     //Randomiza os numeros
     static random(m) {
+        let newMatrix = new Matrix(m.rows, m.cols);
         for (let i = 0; i < m.rows; i++) {
             for (let j = 0; j < m.cols; j++) {
                 //numeros gauseanos
-                m.data[i][j] = Math.random() * 2 - 1;
+                newMatrix.data[i][j] = Math.random() * 2 - 1;
             }
 
         }
+        return newMatrix;
 
     }
 
     //map
     static map(m, func) {
+        let newMatrix = new Matrix(m.rows, m.cols);
         for (let i = 0; i < m.rows; i++) {
             for (let j = 0; j < m.cols; j++) {
-                m.data[i][j] = func(m.data[i][j]);
+                newMatrix.data[i][j] = func(m.data[i][j]);
             }
 
         }
+        return newMatrix;
 
     }
 
     //Matriz Identidade
     static identy(m) {
+        let newMatrix = new Matrix(m.rows, m.cols);
         for (let i = 0; i < m.rows; i++) {
             for (let j = 0; j < m.cols; j++) {
                 if (i == j) {
@@ -44,6 +58,7 @@ export class Matrix {
             }
 
         }
+        return newMatrix;
 
     }
 
@@ -134,7 +149,7 @@ export class Matrix {
     }
 
     //hadamard
-    static hadamardProduct(m1, m2) {
+    static hadamard(m1, m2) {
         if (m1.rows != m2.rows || m1.cols != m2.cols) {
             console.log("Matrizes de tamanhos diferentes");
             return;
@@ -149,7 +164,7 @@ export class Matrix {
 
     }
     //Deteminante de matriz
-    static matrixDeterminant(m) {
+    static determinant(m) {
         if (m.rows != m.cols) {
             console.log("Matriz não é quadrada.");
             return;
