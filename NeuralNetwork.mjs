@@ -8,7 +8,7 @@ function sigmoid(x) {
 function dsigmoid(y) {
     return y * (1 - y);
 }
-class NeuralNetwork {
+ export class NeuralNetwork {
     constructor(i_nodes, h_nodes, o_nodes) {
         //criação das camadas
         this.i_nodes = i_nodes;
