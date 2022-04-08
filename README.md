@@ -6,7 +6,7 @@
 *Neste trabalho tentarei apresentar de forma visual uma rede neural funcionando*
 
 ### A ser Realizado
-- [ ] Criação de Matrizes e suas operações.
+- [x] Criação de Matrizes e suas operações.
   - [x] Matriz Identidade
   - [x] Matriz Transposta
   - [x] Matriz Oposta
@@ -16,10 +16,12 @@
   - [x] Multiplicação de matriz por um número real
   - [x] Função map
   - [x] Hadamard
-- [ ] Criação da Rede
+- [x] Criação da Rede
   - [x] Ligação entre camadas e inicialização dos pesos / bias
-  - [ ] Processo feedforward
-  - [ ] Backpropagation
+  - [x] Processo feedforward
+  - [x] Backpropagation
+- [ ] Representação grafica
+  - [ ] Definindo plugin 
   
 
 <p align="center"> :eye: </p>
