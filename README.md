@@ -21,7 +21,7 @@
   - [x] Processo feedforward
   - [x] Backpropagation
 - [ ] Representação grafica
-  - [ ]Definindo plugin 
+  - [ ] Definindo plugin 
   
 
 <p align="center"> :eye: </p>
