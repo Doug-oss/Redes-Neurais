@@ -42,7 +42,6 @@ function dsigmoid(y) {
         let epochs = 10000;
         let interations = 0;
 
-        let output_errors;
         //while
         while (interations <= epochs){
             //input -> hidden
@@ -59,7 +58,7 @@ function dsigmoid(y) {
             //Backpropagation
             //calculo do erro
             let targets = Matrix.arrayToMatrix(target_array);
-            output_errors = Matrix.subtract(targets, outputs);
+            let output_errors = Matrix.subtract(targets, outputs);
 
             //quebra o loop
             if(output_errors.data < 0.1 && output_errors.data > -0.1){
@@ -98,7 +97,6 @@ function dsigmoid(y) {
             //atualização dos bias hidden --> input
             this.b_h = Matrix.add(this.b_h, gradiente_h);
             
-            console.log("Tax Error: " + output_errors.data);
             console.log("Epochs: " + interations);
             
             interations++;
@@ -114,7 +112,6 @@ function dsigmoid(y) {
         let outputs = Matrix.multiply(this.w_ho, hidden);
         outputs = Matrix.add(outputs, this.b_o);
         outputs = Matrix.map(outputs, sigmoid);
-        console.table(outputs.data);
 
         return outputs.data;
     }
@@ -123,7 +120,7 @@ function dsigmoid(y) {
 
 }
 
-
+/*
 let nn = new NeuralNetwork(2, 2, 1);
 
 
@@ -147,8 +144,11 @@ let data_train = [
     }
 ];
 
+
 for (let i = 0; i < data_train.length; i++) {
     nn.train(data_train[i].input, data_train[i].target);
 }
 
+
 nn.predict([1, 0]);
+*/
