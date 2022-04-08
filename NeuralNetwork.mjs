@@ -44,8 +44,7 @@ class NeuralNetwork {
 
         let output_errors;
         //while
-        while (interations <= epochs || output_errors > 0.01) {
-            //processo de feedforward 
+        while (interations <= epochs){
             //input -> hidden
             let inputs = Matrix.arrayToMatrix(input_array);
             let hidden = Matrix.multiply(this.w_ih, inputs);
@@ -63,7 +62,7 @@ class NeuralNetwork {
             output_errors = Matrix.subtract(targets, outputs);
 
             //quebra o loop
-            if(output_errors.data < 0.1){
+            if(output_errors.data < 0.1 && output_errors.data > -0.1){
                 console.log("Treinamento Acabou.");
                 break;
             }
@@ -105,14 +104,51 @@ class NeuralNetwork {
             interations++;
 
         }
-        
-
     }
+    predict(input_array) {
+        let inputs = Matrix.arrayToMatrix(input_array);
+        let hidden = Matrix.multiply(this.w_ih, inputs);
+        hidden = Matrix.add(hidden, this.b_h);
+        hidden = Matrix.map(hidden, sigmoid);
+
+        let outputs = Matrix.multiply(this.w_ho, hidden);
+        outputs = Matrix.add(outputs, this.b_o);
+        outputs = Matrix.map(outputs, sigmoid);
+        console.table(outputs.data);
+
+        return outputs.data;
+    }
+    
+    
 
 }
 
 
 let nn = new NeuralNetwork(2, 2, 1);
 
-nn.train([1, 0], [1]);
 
+//Teste XOR
+let data_train = [
+    {
+        input: [0, 0],
+        target: [0]
+    },
+    {
+        input: [0, 1],
+        target: [1]
+    },
+    {
+        input: [1, 0],
+        target: [1]
+    },
+    {
+        input: [1, 1],
+        target: [0]
+    }
+];
+
+for (let i = 0; i < data_train.length; i++) {
+    nn.train(data_train[i].input, data_train[i].target);
+}
+
+nn.predict([1, 0]);
