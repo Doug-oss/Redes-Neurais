@@ -61,6 +61,13 @@ class NeuralNetwork {
             //calculo do erro
             let targets = Matrix.arrayToMatrix(target_array);
             output_errors = Matrix.subtract(targets, outputs);
+
+            //quebra o loop
+            if(output_errors.data < 0.1){
+                console.log("Treinamento Acabou.");
+                break;
+            }
+
             let d_outputs = Matrix.map(outputs, dsigmoid);
             let hidden_T = Matrix.transpose(hidden);
             
@@ -92,12 +99,13 @@ class NeuralNetwork {
             //atualização dos bias hidden --> input
             this.b_h = Matrix.add(this.b_h, gradiente_h);
             
-            console.log("tax Error: " + output_errors.data);
-            console.log("epochs: " + interations);
+            console.log("Tax Error: " + output_errors.data);
+            console.log("Epochs: " + interations);
             
             interations++;
 
         }
+        
 
     }
 
