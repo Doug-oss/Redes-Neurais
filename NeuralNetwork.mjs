@@ -89,6 +89,8 @@ export class NeuralNetwork {
 
         console.log("Erro: " + output_errors.data);
 
+        return output_errors.data[0];
+
 
     }
     predict(input_array) {

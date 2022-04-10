@@ -54,6 +54,11 @@
             </div>
         </div>
     </div>
+    <div class="container">
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
 
 
 
@@ -62,6 +67,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module">
         import { Matrix } from './Matrizes.mjs';
         import { NeuralNetwork } from './NeuralNetwork.mjs';
@@ -81,18 +87,52 @@
             [0]
         ];
 
+
+
+        let errors = [0]
+
         let epochs = 10000;
         let interations = 0;
+
+        const labels = [];
         while (interations < epochs) {
             for (let i = 0; i < inputs.length; i++) {
                 nn.train(inputs[i], outputs[i]);
+                errors.push(nn.train(inputs[i], outputs[i]));
             }
-            interations++;
+            labels.push(interations);
             
+            interations++;
+
+            
+
         }
 
 
-        nn.predict([0, 0]);
+        nn.predict([1, 0]);
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Erro de Treino',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: errors,
+            }]
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: {}
+        };
+
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+
+        myChart.update();
 
     </script>
 </body>
