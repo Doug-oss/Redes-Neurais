@@ -163,6 +163,16 @@ export class Matrix {
         return newMatrix;
 
     }
+    //matrix to array
+    static matrixToArray(m) {
+        let array = [];
+        for (let i = 0; i < m.rows; i++) {
+            for (let j = 0; j < m.cols; j++) {
+                array.push(m.data[i][j]);
+            }
+        }
+        return array;
+    }
     //Deteminante de matriz
     static determinant(m) {
         if (m.rows != m.cols) {

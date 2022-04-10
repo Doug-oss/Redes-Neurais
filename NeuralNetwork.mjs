@@ -8,7 +8,7 @@ function sigmoid(x) {
 function dsigmoid(y) {
     return y * (1 - y);
 }
- export class NeuralNetwork {
+export class NeuralNetwork {
     constructor(i_nodes, h_nodes, o_nodes) {
         //criação das camadas
         this.i_nodes = i_nodes;
@@ -34,74 +34,62 @@ function dsigmoid(y) {
         this.b_o = Matrix.map(this.b_o, (x) => {
             return 1;
         });
-        
+
 
     }
     train(input_array, target_array) {
         let learning_rate = 0.1;
-        let epochs = 10000;
-        let interations = 0;
 
-        //while
-        while (interations <= epochs){
-            //input -> hidden
-            let inputs = Matrix.arrayToMatrix(input_array);
-            let hidden = Matrix.multiply(this.w_ih, inputs);
-            hidden = Matrix.add(hidden, this.b_h);
-            hidden = Matrix.map(hidden, sigmoid);
-            
-            //output -> hidden
-            let outputs = Matrix.multiply(this.w_ho, hidden);
-            outputs = Matrix.add(outputs, this.b_o);
-            outputs = Matrix.map(outputs, sigmoid);
-            
-            //Backpropagation
-            //calculo do erro
-            let targets = Matrix.arrayToMatrix(target_array);
-            let output_errors = Matrix.subtract(targets, outputs);
+        //input -> hidden
+        let inputs = Matrix.arrayToMatrix(input_array);
+        let hidden = Matrix.multiply(this.w_ih, inputs);
+        hidden = Matrix.add(hidden, this.b_h);
+        hidden = Matrix.map(hidden, sigmoid);
 
-            //quebra o loop
-            if(output_errors.data < 0.1 && output_errors.data > -0.1){
-                console.log("Treinamento Acabou.");
-                break;
-            }
+        //output -> hidden
+        let outputs = Matrix.multiply(this.w_ho, hidden);
+        outputs = Matrix.add(outputs, this.b_o);
+        outputs = Matrix.map(outputs, sigmoid);
 
-            let d_outputs = Matrix.map(outputs, dsigmoid);
-            let hidden_T = Matrix.transpose(hidden);
-            
-            //calculo do gradiente
-            let gradiente_o = Matrix.hadamard(output_errors, d_outputs);
-            gradiente_o = Matrix.scalarMultiply(gradiente_o, learning_rate);
-            
-            //atualização dos pesos output --> hidden
-            let ho_deltas = Matrix.multiply(gradiente_o, hidden_T);
-            this.w_ho = Matrix.add(this.w_ho, ho_deltas);
+        //Backpropagation
+        //calculo do erro
+        let targets = Matrix.arrayToMatrix(target_array);
+        let output_errors = Matrix.subtract(targets, outputs);
 
-            //atualização dos bias output --> hidden
-            this.b_o = Matrix.add(this.b_o, gradiente_o);
-            
-            //calculo do erro
-            let w_ho_T = Matrix.transpose(this.w_ho);
-            let ih_errors = Matrix.multiply(w_ho_T, output_errors);
-            let d_hidden = Matrix.map(hidden, dsigmoid);
-            let inputs_T = Matrix.transpose(inputs);
+        let d_outputs = Matrix.map(outputs, dsigmoid);
+        let hidden_T = Matrix.transpose(hidden);
 
-            //calculo do gradiente
-            let gradiente_h = Matrix.hadamard(ih_errors, d_hidden);
-            gradiente_h = Matrix.scalarMultiply(gradiente_h, learning_rate);
+        //calculo do gradiente
+        let gradiente_o = Matrix.hadamard(output_errors, d_outputs);
+        gradiente_o = Matrix.scalarMultiply(gradiente_o, learning_rate);
 
-            //atualização dos pesos hidden --> input
-            let ih_deltas = Matrix.multiply(gradiente_h, inputs_T);
-            this.w_ih = Matrix.add(this.w_ih, ih_deltas);
+        //atualização dos pesos output --> hidden
+        let ho_deltas = Matrix.multiply(gradiente_o, hidden_T);
+        this.w_ho = Matrix.add(this.w_ho, ho_deltas);
 
-            //atualização dos bias hidden --> input
-            this.b_h = Matrix.add(this.b_h, gradiente_h);
-            
-            console.log("Epochs: " + interations);
-            
-            interations++;
+        //atualização dos bias output --> hidden
+        this.b_o = Matrix.add(this.b_o, gradiente_o);
 
-        }
+        //calculo do erro
+        let w_ho_T = Matrix.transpose(this.w_ho);
+        let ih_errors = Matrix.multiply(w_ho_T, output_errors);
+        let d_hidden = Matrix.map(hidden, dsigmoid);
+        let inputs_T = Matrix.transpose(inputs);
+
+        //calculo do gradiente
+        let gradiente_h = Matrix.hadamard(ih_errors, d_hidden);
+        gradiente_h = Matrix.scalarMultiply(gradiente_h, learning_rate);
+
+        //atualização dos pesos hidden --> input
+        let ih_deltas = Matrix.multiply(gradiente_h, inputs_T);
+        this.w_ih = Matrix.add(this.w_ih, ih_deltas);
+
+        //atualização dos bias hidden --> input
+        this.b_h = Matrix.add(this.b_h, gradiente_h);
+
+        console.log("Erro: " + output_errors.data);
+
+
     }
     predict(input_array) {
         let inputs = Matrix.arrayToMatrix(input_array);
@@ -112,43 +100,9 @@ function dsigmoid(y) {
         let outputs = Matrix.multiply(this.w_ho, hidden);
         outputs = Matrix.add(outputs, this.b_o);
         outputs = Matrix.map(outputs, sigmoid);
+        outputs = Matrix.matrixToArray(outputs);
 
-        return outputs.data;
+        console.log(outputs[0]);
+        return outputs;
     }
-    
-    
-
 }
-
-/*
-let nn = new NeuralNetwork(2, 2, 1);
-
-
-//Teste XOR
-let data_train = [
-    {
-        input: [0, 0],
-        target: [0]
-    },
-    {
-        input: [0, 1],
-        target: [1]
-    },
-    {
-        input: [1, 0],
-        target: [1]
-    },
-    {
-        input: [1, 1],
-        target: [0]
-    }
-];
-
-
-for (let i = 0; i < data_train.length; i++) {
-    nn.train(data_train[i].input, data_train[i].target);
-}
-
-
-nn.predict([1, 0]);
-*/
