@@ -87,29 +87,41 @@
             [0]
         ];
 
-
-
-        let errors = [0]
-
-        let epochs = 10000;
-        let interations = 0;
-
-        const labels = [];
-        while (interations < epochs) {
-            for (let i = 0; i < inputs.length; i++) {
-                nn.train(inputs[i], outputs[i]);
-                errors.push(nn.train(inputs[i], outputs[i]));
-            }
-            labels.push(interations);
-            
-            interations++;
-
-            
-
+        function addData(chart, label, data) {
+            chart.data.labels.push(label);
+            chart.data.datasets.forEach((dataset) => {
+                dataset.data.push(data);
+            });
+            chart.update();
         }
 
 
-        nn.predict([1, 0]);
+        let errors = [null]
+        let epochs = 100;
+        let interations = 0;
+
+        let count = 0;
+        const labels = [];
+
+        setInterval(() => {
+
+            if (interations == inputs.length) {
+                return interations = 0;
+            }
+
+            for (let i = 0; i < inputs.length; i++) {
+                nn.train(inputs[i], outputs[i]);
+                
+            }
+            addData(myChart, count, nn.train(inputs[1], outputs[1]));
+            
+            
+
+            interations++;
+            count++;
+
+        }, 10)
+
 
         const data = {
             labels: labels,
@@ -132,7 +144,7 @@
             config
         );
 
-        myChart.update();
+
 
     </script>
 </body>

@@ -87,8 +87,6 @@ export class NeuralNetwork {
         //atualização dos bias hidden --> input
         this.b_h = Matrix.add(this.b_h, gradiente_h);
 
-        console.log("Erro: " + output_errors.data);
-
         return output_errors.data[0];
 
 
