@@ -72,7 +72,7 @@
         import { Matrix } from './Matrizes.mjs';
         import { NeuralNetwork } from './NeuralNetwork.mjs';
 
-        let nn = new NeuralNetwork(2, 3, 1);
+        let nn = new NeuralNetwork(2, 5, 1);
 
         let inputs = [
             [1, 1],
@@ -126,7 +126,7 @@
         const data = {
             labels: labels,
             datasets: [{
-                label: 'Erro de Treino',
+                label: 'Erro da Entrada [1,0]',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: errors,
