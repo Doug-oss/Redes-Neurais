@@ -118,14 +118,27 @@
 
                         document.getElementById('nnOutput').style.backgroundColor = value > 0.5 ? '#b52121d6' : '#ffffff';
                         document.getElementById('nnOutput').innerHTML = value.toFixed(4);
+
                         let inputsHtml = document.querySelectorAll('#nnInput');
                         inputsHtml.forEach((input, index) => {
                             input.style.backgroundColor = inputs[i][index] > 0.5 ? '#b52121d6' : '#ffffff';
                             input.innerHTML = inputs[i][index]
                         });
 
+                        let hiddenNeuron = nn.w_ih.data.forEach((value, index) => {
+                            return value.forEach((value, index) => {
+                                let hiddenHtml = document.querySelectorAll('#nnHidden');
+                                hiddenHtml[index].style.backgroundColor = value > 0.5 ? '#b52121d6' : '#ffffff';
+                                hiddenHtml[index].innerHTML = value.toFixed(4);
+
+
+                            });
+                
+                        });
+
+
                     }, i * 100);
-                    
+
 
 
                 });
