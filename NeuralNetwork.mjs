@@ -38,7 +38,7 @@ export class NeuralNetwork {
 
     }
     train(input_array, target_array) {
-        let learning_rate = 0.1;
+        let learning_rate = 0.3;
 
         //input -> hidden
         let inputs = Matrix.arrayToMatrix(input_array);
@@ -102,7 +102,6 @@ export class NeuralNetwork {
         outputs = Matrix.map(outputs, sigmoid);
         outputs = Matrix.matrixToArray(outputs);
 
-        console.log(outputs[0]);
         return outputs;
     }
 }
